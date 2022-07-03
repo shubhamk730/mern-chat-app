@@ -14,7 +14,6 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
-  Spinner,
   Text,
   Tooltip,
   useDisclosure,
@@ -27,6 +26,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import ChatLoading from "../ChatLoading";
 import UserListItem from "../UserAvatar/UserListItem";
+import { Spinner } from "@chakra-ui/spinner";
 
 const SideDrawer = () => {
   const [search, setSearch] = useState();

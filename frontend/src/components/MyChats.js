@@ -20,7 +20,7 @@ const MyChats = () => {
         },
       };
       const { data } = await axios.get("api/chat", config);
-      console.log(data);
+      // console.log("Chats data you are looking for is here :", data);
       setChats(data);
     } catch (error) {
       toast({
@@ -36,7 +36,7 @@ const MyChats = () => {
 
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
-    fetchChats;
+    fetchChats();
   }, []);
 
   return (
@@ -46,7 +46,7 @@ const MyChats = () => {
       alignItems="center"
       p={3}
       bg="white"
-      w={{ base: "100%", md: "31%" }}
+      w={{ base: "100%", md: "30%" }}
       borderRadius="lg"
       borderWidth="1px"
     >
@@ -65,7 +65,9 @@ const MyChats = () => {
           d="flex"
           fontSize={{ base: "17px", md: "10px", lg: "17px" }}
           rightIcon={<AddIcon />}
-        ></Button>
+        >
+          New Group Chat
+        </Button>
       </Box>
       <Box
         d="flex"
@@ -80,22 +82,24 @@ const MyChats = () => {
         {chats ? (
           <Stack overflowY="scroll">
             {chats.map((chat) => {
-              <Box
-                onClick={() => setSelectedChat(chat)}
-                cursor="pointer"
-                bg={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
-                color={selectedChat === chat ? "white" : "black"}
-                px={3}
-                py={2}
-                borderRadius="lg"
-                key={chat._id}
-              >
-                <Text>
-                  {!chat.isGroupChat
-                    ? getSender(loggedUser, chat.users)
-                    : chat.chatName}
-                </Text>
-              </Box>;
+              return (
+                <Box
+                  onClick={() => setSelectedChat(chat)}
+                  cursor="pointer"
+                  bg={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
+                  color={selectedChat === chat ? "white" : "black"}
+                  px={3}
+                  py={2}
+                  borderRadius="lg"
+                  key={chat._id}
+                >
+                  <Text>
+                    {!chat.isGroupChat
+                      ? `${getSender(loggedUser, chat.users)}`
+                      : chat.chatName}
+                  </Text>
+                </Box>
+              );
             })}
           </Stack>
         ) : (
