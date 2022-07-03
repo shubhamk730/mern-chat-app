@@ -8,7 +8,7 @@
   background-position: center;
 }
 
-::webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0px;
 }
 
