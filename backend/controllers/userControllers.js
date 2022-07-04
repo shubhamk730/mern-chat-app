@@ -56,7 +56,7 @@ const authUser = expressAsyncHandler(async (req, res, next) => {
   }
 });
 
-const allUsers = expressAsyncHandler(async (req, res, next) => {
+const allUsers = expressAsyncHandler(async (req, res) => {
   const keyword = req.query.search
     ? {
         $or: [
@@ -67,8 +67,6 @@ const allUsers = expressAsyncHandler(async (req, res, next) => {
     : {};
 
   const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
-
-  // const users = await User.find(keyword);
   res.send(users);
 });
 
