@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { getSender } from "../config/ChatLogics";
 import { ChatState } from "../Context/ChatProvider";
 import ChatLoading from "./ChatLoading";
+import GroupChatModal from "./miscellaneous/GroupChatModal";
 
 const MyChats = () => {
   const [loggedUser, setLoggedUser] = useState();
@@ -61,13 +62,15 @@ const MyChats = () => {
         alignItems="center"
       >
         My Chats
-        <Button
-          d="flex"
-          fontSize={{ base: "17px", md: "10px", lg: "17px" }}
-          rightIcon={<AddIcon />}
-        >
-          New Group Chat
-        </Button>
+        <GroupChatModal>
+          <Button
+            d="flex"
+            fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+            rightIcon={<AddIcon />}
+          >
+            New Group Chat
+          </Button>
+        </GroupChatModal>
       </Box>
       <Box
         d="flex"
@@ -82,6 +85,9 @@ const MyChats = () => {
         {chats ? (
           <Stack overflowY="scroll">
             {chats.map((chat) => {
+              {
+                console.log(chat);
+              }
               return (
                 <Box
                   onClick={() => setSelectedChat(chat)}
@@ -94,7 +100,7 @@ const MyChats = () => {
                   key={chat._id}
                 >
                   <Text>
-                    {!chat.isGroupChat
+                    {!chat.isGroup
                       ? `${getSender(loggedUser, chat.users)}`
                       : chat.chatName}
                   </Text>
