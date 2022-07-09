@@ -20,7 +20,7 @@ const chatModel = new Schema(
     ],
     latestMessage: {
       type: Schema.Types.ObjectId,
-      ref: "message",
+      ref: "Message",
     },
     groupAdmin: {
       type: Schema.Types.ObjectId,
